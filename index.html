@@ -203,336 +203,429 @@
         .source-link:hover {
             text-decoration: underline;
         }
+
+        /* Password Gate Styles */
+        #password-gate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .gate-container {
+            text-align: center;
+            background: var(--surface);
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 3rem;
+            max-width: 450px;
+            width: 90%;
+        }
+
+        .gate-container h2 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            border: none;
+        }
+
+        .gate-container p {
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+        }
+
+        #password-input {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            text-align: center;
+            margin-bottom: 1rem;
+            font-family: monospace;
+        }
+
+        #password-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        #submit-btn {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            background: var(--accent);
+            color: var(--bg);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        #submit-btn:hover {
+            background: var(--accent-hover);
+        }
+
+        #error-msg {
+            color: var(--danger);
+            margin-top: 1rem;
+            display: none;
+        }
+
+        #main-content {
+            display: none;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🤖 DKTrenchBot v2</h1>
-            <p class="subtitle">XRPL Meme Token Trading Bot — Full Audit Documentation</p>
-            <span class="status-badge">● LIVE PRODUCTION</span>
-        </header>
+    <!-- Password Gate -->
+    <div id="password-gate">
+        <div class="gate-container">
+            <h2>🔒 Protected Audit Page</h2>
+            <p>Enter the access password to view DKTrenchBot v2 audit documentation</p>
+            <input type="password" id="password-input" placeholder="Enter password..." autocomplete="off">
+            <button id="submit-btn" onclick="checkPassword()">Access Audit</button>
+            <p id="error-msg">❌ Incorrect password. Please try again.</p>
+        </div>
+    </div>
 
-        <section>
-            <h2>Overview</h2>
-            <p><strong>DKTrenchBot v2</strong> is an automated XRPL meme token trading bot designed to detect and capitalize on early-stage token launches through trustline monitoring and order book analysis. The bot operates 24/7 on the XRPL mainnet, executing trades based on configurable quality filters and dynamic position sizing.</p>
+    <!-- Main Content (hidden until authenticated) -->
+    <div id="main-content">
+        <div class="container">
+            <header>
+                <h1>🤖 DKTrenchBot v2</h1>
+                <p class="subtitle">XRPL Meme Token Trading Bot — Full Audit Documentation</p>
+                <span class="status-badge">● LIVE PRODUCTION</span>
+            </header>
 
-            <div class="metric-grid">
-                <div class="metric-card">
-                    <div class="metric-value">v2.0</div>
-                    <div class="metric-label">Version</div>
+            <section>
+                <h2>Overview</h2>
+                <p><strong>DKTrenchBot v2</strong> is an automated XRPL meme token trading bot designed to detect and capitalize on early-stage token launches through trustline monitoring and order book analysis. The bot operates 24/7 on the XRPL mainnet, executing trades based on configurable quality filters and dynamic position sizing.</p>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">v2.0</div>
+                        <div class="metric-label">Version</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">Python 3.11</div>
+                        <div class="metric-label">Runtime</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">~1s</div>
+                        <div class="metric-label">Scan Cycle</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">Max 10</div>
+                        <div class="metric-label">Concurrent Positions</div>
+                    </div>
                 </div>
-                <div class="metric-card">
-                    <div class="metric-value">Python 3.11</div>
-                    <div class="metric-label">Runtime</div>
+            </section>
+
+            <section>
+                <h2>Wallet & Infrastructure</h2>
+
+                <h3>Bot Wallet (Hot Wallet)</h3>
+                <div class="wallet-address">rKQACag8Td9TrMxBwYJPGRMDV8cxGfKsmF</div>
+                <ul>
+                    <li><strong>Type:</strong> Hot wallet with RegularKey authorization</li>
+                    <li><strong>Initial Funding:</strong> 150 XRP</li>
+                    <li><strong>Purpose:</strong> Automated trading operations</li>
+                    <li><strong>Risk Level:</strong> High (contains operational funds only)</li>
+                </ul>
+
+                <h3>Main Wallet (Cold Storage)</h3>
+                <div class="wallet-address">rUWWnjZyBsmGPPLirtCf3NbUXJ1amet86e</div>
+                <ul>
+                    <li><strong>Type:</strong> Cold storage / profit destination</li>
+                    <li><strong>Authorization:</strong> RegularKey set to bot wallet for controlled access</li>
+                    <li><strong>Purpose:</strong> Long-term holdings and profit accumulation</li>
+                </ul>
+
+                <h3>Infrastructure</h3>
+                <table>
+                    <tr>
+                        <th>Component</th>
+                        <th>Details</th>
+                    </tr>
+                    <tr>
+                        <td>Hosting Platform</td>
+                        <td>XRPLClaw.com (dedicated VPS)</td>
+                    </tr>
+                    <tr>
+                        <td>XRPL Endpoint</td>
+                        <td>Private CLIO RPC (rpc.xrplclaw.com)</td>
+                    </tr>
+                    <tr>
+                        <td>WebSocket</td>
+                        <td>Private WSS (wss://rpc.xrplclaw.com/ws)</td>
+                    </tr>
+                    <tr>
+                        <td>Dashboard</td>
+                        <td>Cloudflare Pages (dktrenchbot.pages.dev)</td>
+                    </tr>
+                    <tr>
+                        <td>Code Repository</td>
+                        <td>GitHub (private)</td>
+                    </tr>
+                </table>
+            </section>
+
+            <section>
+                <h2>Trading Strategy</h2>
+
+                <h3>Detection Logic</h3>
+                <p>The bot monitors the XRPL ledger for new trustline creations (TrustSet transactions) and evaluates tokens against a multi-factor scoring system:</p>
+
+                <table>
+                    <tr>
+                        <th>Factor</th>
+                        <th>Threshold</th>
+                        <th>Weight</th>
+                    </tr>
+                    <tr>
+                        <td>Volume (last 5 min)</td>
+                        <td>≥ 20 XRP</td>
+                        <td>Primary filter</td>
+                    </tr>
+                    <tr>
+                        <td>Burst TrustSets</td>
+                        <td>≥ 10 in 5 min</td>
+                        <td>Primary filter</td>
+                    </tr>
+                    <tr>
+                        <td>Quality Score</td>
+                        <td>≥ 30</td>
+                        <td>Entry gate</td>
+                    </tr>
+                    <tr>
+                        <td>TVL (Pool Liquidity)</td>
+                        <td>≥ 200 XRP</td>
+                        <td>Safety filter</td>
+                    </tr>
+                </table>
+
+                <h3>Scoring Components</h3>
+                <ul>
+                    <li><strong>Cluster Detection (+20%):</strong> Multiple related wallets creating trustlines simultaneously</li>
+                    <li><strong>Alpha Signal (+15%):</strong> Early mover advantage from trusted sources</li>
+                    <li><strong>ML Prediction (+15%):</strong> Historical pattern matching</li>
+                    <li><strong>Bull Market Bonus (+10%):</strong> Macro sentiment adjustment</li>
+                    <li><strong>Smart Wallet Activity (+5% each):</strong> Known profitable traders entering</li>
+                </ul>
+
+                <h3>Position Sizing (Dynamic % of Balance)</h3>
+                <table>
+                    <tr>
+                        <th>Tier</th>
+                        <th>Score Range</th>
+                        <th>Allocation</th>
+                    </tr>
+                    <tr>
+                        <td>Elite</td>
+                        <td>≥ 65</td>
+                        <td>20% of balance</td>
+                    </tr>
+                    <tr>
+                        <td>Normal</td>
+                        <td>≥ 50</td>
+                        <td>12% of balance</td>
+                    </tr>
+                    <tr>
+                        <td>Small</td>
+                        <td>≥ 40</td>
+                        <td>6% of balance</td>
+                    </tr>
+                </table>
+
+                <div class="warning-box">
+                    <strong>Safety Caps:</strong> Maximum 100 XRP per trade | Minimum 3 XRP per trade | Maximum 10 concurrent positions
                 </div>
-                <div class="metric-card">
-                    <div class="metric-value">~1s</div>
-                    <div class="metric-label">Scan Cycle</div>
+            </section>
+
+            <section>
+                <h2>Exit Strategy</h2>
+
+                <h3>Dynamic Take-Profit Ladder</h3>
+                <table>
+                    <tr>
+                        <th>Milestone</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <td>2x entry price</td>
+                        <td>Sell 50% of position</td>
+                    </tr>
+                    <tr>
+                        <td>3x entry price</td>
+                        <td>Sell 20% of remaining</td>
+                    </tr>
+                    <tr>
+                        <td>5x entry price</td>
+                        <td>Sell 15% of remaining</td>
+                    </tr>
+                    <tr>
+                        <td>Above 5x</td>
+                        <td>30% trailing stop loss</td>
+                    </tr>
+                </table>
+
+                <h3>Stop Loss</h3>
+                <ul>
+                    <li><strong>Hard Stop:</strong> -50% from entry price (automatic sell)</li>
+                    <li><strong>Trailing Stop:</strong> Activates after 5x milestone (30% pullback)</li>
+                </ul>
+
+                <h3>Trustline Cleanup</h3>
+                <p>On every position close, the bot automatically:</p>
+                <ol>
+                    <li>Sells dust balances (< 0.000001 XRP equivalent)</li>
+                    <li>Burns remaining token balance (if any)</li>
+                    <li>Removes the trustline to reclaim 0.2 XRP reserve</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Risk Management</h2>
+
+                <div class="danger-box">
+                    <strong>⚠️ Risk Disclosure:</strong> This bot trades highly speculative meme tokens on the XRPL. All capital deployed should be considered at risk. Past performance does not guarantee future results.
                 </div>
-                <div class="metric-card">
-                    <div class="metric-value">Max 10</div>
-                    <div class="metric-label">Concurrent Positions</div>
+
+                <h3>Reserve Requirements</h3>
+                <ul>
+                    <li><strong>Base Reserve:</strong> 1 XRP (account activation)</li>
+                    <li><strong>Trustline Reserve:</strong> 0.2 XRP per active trustline</li>
+                    <li><strong>Buffer:</strong> Bot maintains minimum 10 XRP free balance for operations</li>
+                </ul>
+
+                <h3>Slippage Protection</h3>
+                <ul>
+                    <li><strong>Default Slippage Buffer:</strong> 10%</li>
+                    <li><strong>Maximum Slippage Check:</strong> Rejects trades if expected slippage > 20%</li>
+                </ul>
+
+                <h3>Circuit Breakers</h3>
+                <ul>
+                    <li>Auto-pause on 3 consecutive losses</li>
+                    <li>Manual kill switch: <code>kill -9 $(pgrep -f bot.py)</code></li>
+                    <li>Emergency withdrawal to main wallet via RegularKey</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Performance Metrics (Backtest Projection)</h2>
+                <p><em>Based on 14-day historical simulation with current configuration (150 XRP starting balance)</em></p>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">+817 XRP</div>
+                        <div class="metric-label">Projected PnL</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">+544.7%</div>
+                        <div class="metric-label">Projected ROI</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">~70%</div>
+                        <div class="metric-label">Win Rate</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">~20</div>
+                        <div class="metric-label">Total Trades</div>
+                    </div>
                 </div>
-            </div>
-        </section>
 
-        <section>
-            <h2>Wallet & Infrastructure</h2>
+                <table>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                    </tr>
+                    <tr>
+                        <td>Starting Balance</td>
+                        <td>150 XRP</td>
+                    </tr>
+                    <tr>
+                        <td>Projected Final Balance</td>
+                        <td>~967 XRP</td>
+                    </tr>
+                    <tr>
+                        <td>Average Win</td>
+                        <td>+80.93 XRP</td>
+                    </tr>
+                    <tr>
+                        <td>Average Loss</td>
+                        <td>-7.28 XRP</td>
+                    </tr>
+                    <tr>
+                        <td>Risk/Reward Ratio</td>
+                        <td>11.1:1</td>
+                    </tr>
+                </table>
 
-            <h3>Bot Wallet (Hot Wallet)</h3>
-            <div class="wallet-address">rKQACag8Td9TrMxBwYJPGRMDV8cxGfKsmF</div>
-            <ul>
-                <li><strong>Type:</strong> Hot wallet with RegularKey authorization</li>
-                <li><strong>Initial Funding:</strong> 150 XRP</li>
-                <li><strong>Purpose:</strong> Automated trading operations</li>
-                <li><strong>Risk Level:</strong> High (contains operational funds only)</li>
-            </ul>
-
-            <h3>Main Wallet (Cold Storage)</h3>
-            <div class="wallet-address">rUWWnjZyBsmGPPLirtCf3NbUXJ1amet86e</div>
-            <ul>
-                <li><strong>Type:</strong> Cold storage / profit destination</li>
-                <li><strong>Authorization:</strong> RegularKey set to bot wallet for controlled access</li>
-                <li><strong>Purpose:</strong> Long-term holdings and profit accumulation</li>
-            </ul>
-
-            <h3>Infrastructure</h3>
-            <table>
-                <tr>
-                    <th>Component</th>
-                    <th>Details</th>
-                </tr>
-                <tr>
-                    <td>Hosting Platform</td>
-                    <td>XRPLClaw.com (dedicated VPS)</td>
-                </tr>
-                <tr>
-                    <td>XRPL Endpoint</td>
-                    <td>Private CLIO RPC (rpc.xrplclaw.com)</td>
-                </tr>
-                <tr>
-                    <td>WebSocket</td>
-                    <td>Private WSS (wss://rpc.xrplclaw.com/ws)</td>
-                </tr>
-                <tr>
-                    <td>Dashboard</td>
-                    <td>Cloudflare Pages (dktrenchbot.pages.dev)</td>
-                </tr>
-                <tr>
-                    <td>Code Repository</td>
-                    <td>GitHub (private)</td>
-                </tr>
-            </table>
-        </section>
-
-        <section>
-            <h2>Trading Strategy</h2>
-
-            <h3>Detection Logic</h3>
-            <p>The bot monitors the XRPL ledger for new trustline creations (TrustSet transactions) and evaluates tokens against a multi-factor scoring system:</p>
-
-            <table>
-                <tr>
-                    <th>Factor</th>
-                    <th>Threshold</th>
-                    <th>Weight</th>
-                </tr>
-                <tr>
-                    <td>Volume (last 5 min)</td>
-                    <td>≥ 20 XRP</td>
-                    <td>Primary filter</td>
-                </tr>
-                <tr>
-                    <td>Burst TrustSets</td>
-                    <td>≥ 10 in 5 min</td>
-                    <td>Primary filter</td>
-                </tr>
-                <tr>
-                    <td>Quality Score</td>
-                    <td>≥ 30</td>
-                    <td>Entry gate</td>
-                </tr>
-                <tr>
-                    <td>TVL (Pool Liquidity)</td>
-                    <td>≥ 200 XRP</td>
-                    <td>Safety filter</td>
-                </tr>
-            </table>
-
-            <h3>Scoring Components</h3>
-            <ul>
-                <li><strong>Cluster Detection (+20%):</strong> Multiple related wallets creating trustlines simultaneously</li>
-                <li><strong>Alpha Signal (+15%):</strong> Early mover advantage from trusted sources</li>
-                <li><strong>ML Prediction (+15%):</strong> Historical pattern matching</li>
-                <li><strong>Bull Market Bonus (+10%):</strong> Macro sentiment adjustment</li>
-                <li><strong>Smart Wallet Activity (+5% each):</strong> Known profitable traders entering</li>
-            </ul>
-
-            <h3>Position Sizing (Dynamic % of Balance)</h3>
-            <table>
-                <tr>
-                    <th>Tier</th>
-                    <th>Score Range</th>
-                    <th>Allocation</th>
-                </tr>
-                <tr>
-                    <td>Elite</td>
-                    <td>≥ 65</td>
-                    <td>20% of balance</td>
-                </tr>
-                <tr>
-                    <td>Normal</td>
-                    <td>≥ 50</td>
-                    <td>12% of balance</td>
-                </tr>
-                <tr>
-                    <td>Small</td>
-                    <td>≥ 40</td>
-                    <td>6% of balance</td>
-                </tr>
-            </table>
-
-            <div class="warning-box">
-                <strong>Safety Caps:</strong> Maximum 100 XRP per trade | Minimum 3 XRP per trade | Maximum 10 concurrent positions
-            </div>
-        </section>
-
-        <section>
-            <h2>Exit Strategy</h2>
-
-            <h3>Dynamic Take-Profit Ladder</h3>
-            <table>
-                <tr>
-                    <th>Milestone</th>
-                    <th>Action</th>
-                </tr>
-                <tr>
-                    <td>2x entry price</td>
-                    <td>Sell 50% of position</td>
-                </tr>
-                <tr>
-                    <td>3x entry price</td>
-                    <td>Sell 20% of remaining</td>
-                </tr>
-                <tr>
-                    <td>5x entry price</td>
-                    <td>Sell 15% of remaining</td>
-                </tr>
-                <tr>
-                    <td>Above 5x</td>
-                    <td>30% trailing stop loss</td>
-                </tr>
-            </table>
-
-            <h3>Stop Loss</h3>
-            <ul>
-                <li><strong>Hard Stop:</strong> -50% from entry price (automatic sell)</li>
-                <li><strong>Trailing Stop:</strong> Activates after 5x milestone (30% pullback)</li>
-            </ul>
-
-            <h3>Trustline Cleanup</h3>
-            <p>On every position close, the bot automatically:</p>
-            <ol>
-                <li>Sells dust balances (< 0.000001 XRP equivalent)</li>
-                <li>Burns remaining token balance (if any)</li>
-                <li>Removes the trustline to reclaim 0.2 XRP reserve</li>
-            </ol>
-        </section>
-
-        <section>
-            <h2>Risk Management</h2>
-
-            <div class="danger-box">
-                <strong>⚠️ Risk Disclosure:</strong> This bot trades highly speculative meme tokens on the XRPL. All capital deployed should be considered at risk. Past performance does not guarantee future results.
-            </div>
-
-            <h3>Reserve Requirements</h3>
-            <ul>
-                <li><strong>Base Reserve:</strong> 1 XRP (account activation)</li>
-                <li><strong>Trustline Reserve:</strong> 0.2 XRP per active trustline</li>
-                <li><strong>Buffer:</strong> Bot maintains minimum 10 XRP free balance for operations</li>
-            </ul>
-
-            <h3>Slippage Protection</h3>
-            <ul>
-                <li><strong>Default Slippage Buffer:</strong> 10%</li>
-                <li><strong>Maximum Slippage Check:</strong> Rejects trades if expected slippage > 20%</li>
-            </ul>
-
-            <h3>Circuit Breakers</h3>
-            <ul>
-                <li>Auto-pause on 3 consecutive losses</li>
-                <li>Manual kill switch: <code>kill -9 $(pgrep -f bot.py)</code></li>
-                <li>Emergency withdrawal to main wallet via RegularKey</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>Performance Metrics (Backtest Projection)</h2>
-            <p><em>Based on 14-day historical simulation with current configuration (150 XRP starting balance)</em></p>
-
-            <div class="metric-grid">
-                <div class="metric-card">
-                    <div class="metric-value">+817 XRP</div>
-                    <div class="metric-label">Projected PnL</div>
+                <div class="warning-box">
+                    <strong>Disclaimer:</strong> Backtest results are projections based on historical data and do not guarantee future performance. Actual results will vary based on market conditions, network congestion, and execution timing.
                 </div>
-                <div class="metric-card">
-                    <div class="metric-value">+544.7%</div>
-                    <div class="metric-label">Projected ROI</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">~70%</div>
-                    <div class="metric-label">Win Rate</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">~20</div>
-                    <div class="metric-label">Total Trades</div>
-                </div>
-            </div>
+            </section>
 
-            <table>
-                <tr>
-                    <th>Metric</th>
-                    <th>Value</th>
-                </tr>
-                <tr>
-                    <td>Starting Balance</td>
-                    <td>150 XRP</td>
-                </tr>
-                <tr>
-                    <td>Projected Final Balance</td>
-                    <td>~967 XRP</td>
-                </tr>
-                <tr>
-                    <td>Average Win</td>
-                    <td>+80.93 XRP</td>
-                </tr>
-                <tr>
-                    <td>Average Loss</td>
-                    <td>-7.28 XRP</td>
-                </tr>
-                <tr>
-                    <td>Risk/Reward Ratio</td>
-                    <td>11.1:1</td>
-                </tr>
-            </table>
+            <section>
+                <h2>Source Code Access</h2>
+                <p>The complete source code for DKTrenchBot v2 is available for audit purposes:</p>
 
-            <div class="warning-box">
-                <strong>Disclaimer:</strong> Backtest results are projections based on historical data and do not guarantee future performance. Actual results will vary based on market conditions, network congestion, and execution timing.
-            </div>
-        </section>
+                <h3>Repository</h3>
+                <p><a href="https://github.com/domx1816-dev/dktrenchbot-v2" class="source-link" target="_blank">https://github.com/domx1816-dev/dktrenchbot-v2</a></p>
+                <ul>
+                    <li><strong>Visibility:</strong> Private (audit access granted upon request)</li>
+                    <li><strong>Primary Language:</strong> Python 3.11</li>
+                    <li><strong>Key Dependencies:</strong> xrpl-py, requests, pandas</li>
+                </ul>
 
-        <section>
-            <h2>Source Code Access</h2>
-            <p>The complete source code for DKTrenchBot v2 is available for audit purposes:</p>
+                <h3>Core Modules</h3>
+                <table>
+                    <tr>
+                        <th>File</th>
+                        <th>Purpose</th>
+                    </tr>
+                    <tr>
+                        <td><code>bot.py</code></td>
+                        <td>Main orchestrator — scan loop, signal processing, trade execution</td>
+                    </tr>
+                    <tr>
+                        <td><code>scanner.py</code></td>
+                        <td>Trustline monitoring, CLOB detection, volume/burst tracking</td>
+                    </tr>
+                    <tr>
+                        <td><code>scorer.py</code></td>
+                        <td>Multi-factor scoring engine (cluster, alpha, ML, smart wallets)</td>
+                    </tr>
+                    <tr>
+                        <td><code>executor.py</code></td>
+                        <td>Trade execution, position management, take-profit ladder</td>
+                    </tr>
+                    <tr>
+                        <td><code>cleanup.py</code></td>
+                        <td>Trustline removal, dust selling, reserve reclamation</td>
+                    </tr>
+                    <tr>
+                        <td><code>config.py</code></td>
+                        <td>Configuration constants, thresholds, safety limits</td>
+                    </tr>
+                    <tr>
+                        <td><code>state_manager.py</code></td>
+                        <td>Persistent state tracking, crash recovery, position journaling</td>
+                    </tr>
+                </table>
 
-            <h3>Repository</h3>
-            <p><a href="https://github.com/domx1816-dev/dktrenchbot-v2" class="source-link" target="_blank">https://github.com/domx1816-dev/dktrenchbot-v2</a></p>
-            <ul>
-                <li><strong>Visibility:</strong> Private (audit access granted upon request)</li>
-                <li><strong>Primary Language:</strong> Python 3.11</li>
-                <li><strong>Key Dependencies:</strong> xrpl-py, requests, pandas</li>
-            </ul>
-
-            <h3>Core Modules</h3>
-            <table>
-                <tr>
-                    <th>File</th>
-                    <th>Purpose</th>
-                </tr>
-                <tr>
-                    <td><code>bot.py</code></td>
-                    <td>Main orchestrator — scan loop, signal processing, trade execution</td>
-                </tr>
-                <tr>
-                    <td><code>scanner.py</code></td>
-                    <td>Trustline monitoring, CLOB detection, volume/burst tracking</td>
-                </tr>
-                <tr>
-                    <td><code>scorer.py</code></td>
-                    <td>Multi-factor scoring engine (cluster, alpha, ML, smart wallets)</td>
-                </tr>
-                <tr>
-                    <td><code>executor.py</code></td>
-                    <td>Trade execution, position management, take-profit ladder</td>
-                </tr>
-                <tr>
-                    <td><code>cleanup.py</code></td>
-                    <td>Trustline removal, dust selling, reserve reclamation</td>
-                </tr>
-                <tr>
-                    <td><code>config.py</code></td>
-                    <td>Configuration constants, thresholds, safety limits</td>
-                </tr>
-                <tr>
-                    <td><code>state_manager.py</code></td>
-                    <td>Persistent state tracking, crash recovery, position journaling</td>
-                </tr>
-            </table>
-
-            <h3>Key Configuration Parameters</h3>
-            <pre>
+                <h3>Key Configuration Parameters</h3>
+                <pre>
 # Entry Filters
 MIN_VOLUME_XRP = 20          # Minimum 5-min volume
 MIN_BURST_TRUSTSETS = 10     # Minimum trustline burst
@@ -556,49 +649,91 @@ TP_3X_SELL_PCT = 0.20        # Sell 20% at 3x
 TP_5X_SELL_PCT = 0.15        # Sell 15% at 5x
 TRAILING_STOP_PCT = 0.30     # 30% trailing stop above 5x
 HARD_STOP_LOSS = 0.50        # 50% hard stop loss
-            </pre>
-        </section>
+                </pre>
+            </section>
 
-        <section>
-            <h2>Operational Transparency</h2>
+            <section>
+                <h2>Operational Transparency</h2>
 
-            <h3>Monitoring & Alerts</h3>
-            <ul>
-                <li><strong>Dashboard:</strong> Real-time position tracking at <a href="https://dktrenchbot.pages.dev" class="source-link" target="_blank">dktrenchbot.pages.dev</a></li>
-                <li><strong>Logging:</strong> All trades logged to persistent JSONL files</li>
-                <li><strong>Health Checks:</strong> Automated supervisor script restarts crashed processes</li>
-            </ul>
+                <h3>Monitoring & Alerts</h3>
+                <ul>
+                    <li><strong>Dashboard:</strong> Real-time position tracking at <a href="https://dktrenchbot.pages.dev" class="source-link" target="_blank">dktrenchbot.pages.dev</a></li>
+                    <li><strong>Logging:</strong> All trades logged to persistent JSONL files</li>
+                    <li><strong>Health Checks:</strong> Automated supervisor script restarts crashed processes</li>
+                </ul>
 
-            <h3>Data Sources</h3>
-            <ul>
-                <li><strong>XRPL Ledger:</strong> Direct RPC queries via private CLIO endpoint</li>
-                <li><strong>Market Data:</strong> Local caching service updates every 3 minutes</li>
-                <li><strong>No Third-Party APIs:</strong> All XRPL operations use direct node connections</li>
-            </ul>
+                <h3>Data Sources</h3>
+                <ul>
+                    <li><strong>XRPL Ledger:</strong> Direct RPC queries via private CLIO endpoint</li>
+                    <li><strong>Market Data:</strong> Local caching service updates every 3 minutes</li>
+                    <li><strong>No Third-Party APIs:</strong> All XRPL operations use direct node connections</li>
+                </ul>
 
-            <h3>Security Practices</h3>
-            <ul>
-                <li>Private keys stored in encrypted secrets file (never committed to version control)</li>
-                <li>RegularKey authorization allows key rotation without moving funds</li>
-                <li>No external API keys required for core functionality</li>
-                <li>All signed transactions sent directly to trusted RPC endpoint</li>
-            </ul>
-        </section>
+                <h3>Security Practices</h3>
+                <ul>
+                    <li>Private keys stored in encrypted secrets file (never committed to version control)</li>
+                    <li>RegularKey authorization allows key rotation without moving funds</li>
+                    <li>No external API keys required for core functionality</li>
+                    <li>All signed transactions sent directly to trusted RPC endpoint</li>
+                </ul>
+            </section>
 
-        <section>
-            <h2>Contact & Verification</h2>
-            <p>For audit verification or questions about this bot's operations:</p>
-            <ul>
-                <li><strong>On-Chain Verification:</strong> Monitor bot wallet <code>rKQACag8Td9TrMxBwYJPGRMDV8cxGfKsmF</code> on any XRPL explorer</li>
-                <li><strong>Transaction History:</strong> All trades are public on the XRPL ledger</li>
-                <li><strong>Code Review:</strong> Contact repository owner for read access</li>
-            </ul>
-        </section>
+            <section>
+                <h2>Contact & Verification</h2>
+                <p>For audit verification or questions about this bot's operations:</p>
+                <ul>
+                    <li><strong>On-Chain Verification:</strong> Monitor bot wallet <code>rKQACag8Td9TrMxBwYJPGRMDV8cxGfKsmF</code> on any XRPL explorer</li>
+                    <li><strong>Transaction History:</strong> All trades are public on the XRPL ledger</li>
+                    <li><strong>Code Review:</strong> Contact repository owner for read access</li>
+                </ul>
+            </section>
 
-        <footer>
-            <p>Generated: April 7, 2026 | DKTrenchBot v2 | XRPL Mainnet</p>
-            <p style="margin-top: 0.5rem; font-size: 0.85rem;">This document is for informational purposes only. Not financial advice.</p>
-        </footer>
+            <footer>
+                <p>Generated: April 7, 2026 | DKTrenchBot v2 | XRPL Mainnet</p>
+                <p style="margin-top: 0.5rem; font-size: 0.85rem;">This document is for informational purposes only. Not financial advice.</p>
+            </footer>
+        </div>
     </div>
+
+    <script>
+        // Simple password protection (client-side, not military-grade but prevents casual browsing)
+        const ACCESS_PASSWORD = 'dkt2026audit'; // Change this password
+        
+        function checkPassword() {
+            const input = document.getElementById('password-input').value;
+            const errorMsg = document.getElementById('error-msg');
+            
+            if (input === ACCESS_PASSWORD) {
+                // Correct password - show content
+                document.getElementById('password-gate').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                
+                // Store session flag so they don't need to re-enter on refresh
+                sessionStorage.setItem('dkt-authenticated', 'true');
+            } else {
+                // Wrong password
+                errorMsg.style.display = 'block';
+                document.getElementById('password-input').value = '';
+                document.getElementById('password-input').focus();
+            }
+        }
+        
+        // Allow Enter key to submit
+        document.getElementById('password-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+        
+        // Check if already authenticated in this session
+        window.addEventListener('load', function() {
+            if (sessionStorage.getItem('dkt-authenticated') === 'true') {
+                document.getElementById('password-gate').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+            } else {
+                document.getElementById('password-input').focus();
+            }
+        });
+    </script>
 </body>
 </html>
